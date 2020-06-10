@@ -4,10 +4,23 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Documento Modelo</title>
+   
+</head>
+<body>
+   <h1>Inserção em ordem</h1>
+   <label>Número</label>
+   <input type="number" id="numero">
+   <button id="inserir">Inserir</button>
+   <div id="resultado"></div>
+
    <script>
       // Liga o modo "chato" do JS
       // Não deixa usar variáveis sem let ou var
       'use strict'
+
+      const numero = document.querySelector('#numero')
+      const inserir = document.querySelector('#inserir')
+      const resultado = document.querySelector('#resultado')
 
       /*
 
@@ -16,12 +29,70 @@
 
          Na parte JS, declare um vetor vazio.
 
+      */
+
+      let vetor = []
+
+      /*
+
+
          Na função associada ao botão, verifique se o valor informado no 
          input é um número. Caso positivo, insira este número EM ORDEM 
          CRESCENTE dentro do vetor (lembre-se de que o usuário poderá
          inserir quantos números quiser dentro do vetor, e que pode já
          haver outros números no vetor inseridos anteriormente). Ignore 
          números repetidos.
+
+      */
+
+      function processa() {
+
+         let valido = true
+         
+         if(isNaN(numero.value)) {
+            alert('Insira um número válido.')
+            numero.focus()
+            valido = false
+         }
+         
+         if(valido) {
+
+            let num = parseInt(numero.value)
+
+            let i // i deve ser lido após o for
+            for(i = 0; i < vetor.length; i++) {
+               // A posição de inserção é igual à posição
+               // do primeiro número maior que o que está a ser inserido
+               console.log(vetor, num)
+
+               if(vetor[i] > num) {
+                  vetor.splice(i, 0, num)
+                  break // Interrompe o loop for
+               }
+            }
+            
+            // O for foi todo percorrido e não ocorreu inserção
+            // Vale também para quando o vetor estiver vazio (primeiro elemento)
+            if(i === vetor.length) {
+               vetor.push(num)
+            }
+            
+            // Exibição do resultado
+            resultado.innerHTML = ''
+            for(let x = 0; x < vetor.length; x++) {
+               resultado.innerHTML += 'Posição ' + x + ': ' + vetor[x] + '<br>'
+            }
+
+            numero.value = '' // Limpa o campo do número
+            numero.focus()
+
+         }
+
+      }
+
+      inserir.addEventListener('click', processa)
+
+      /*
 
          Para colocar o número no local correto, você deverá percorrer
          o vetor com um loop for, verificando se o número que já está na
@@ -36,9 +107,6 @@
       */      
 
    </script>
-</head>
-<body>
-   <h1>Título do documento</h1>
-   <p>Parágrafo de texto</p>
+
 </body>
 </html>
