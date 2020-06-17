@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Documento Modelo</title>
+   <script>
+      // Liga o modo "chato" do JS
+      // Não deixa usar variáveis sem let ou var
+      'use strict'
+
+      // Como definir uma função:
+      // 1) É obrigatório utilizar a palavra-chave function
+      // 2) A função PODE ter um nome (existem funções anônimas!)
+      // 3) Um par de abre e fecha parênteses
+      // 3.1) Dentro dos parênteses, podem ser passados dados externos à função,
+      // mas necessários para as tarefas que a função desempenhará. Esses dados
+      // passados têm o nome de PARÂMETROS ou ARGUMENTOS.
+      // 4) Um par de chaves que delimitará o código que fará parte da função
+      // 5) No corpo da função, PODE haver um valor de retorno. Quando há, usa-se
+      // a palavra-chave return seguida do valor de retorno
+
+      // Fatorial de um número n é igual ao produto dele próprio multiplicado
+      // pelos seus antecessores maiores que 1
+      // 5! = 5 * 4 * 3 * 2 * 1 (120)
+      
+      // Chamada de função feita ANTES da declaração da função
+      let x = fatorial(8)
+      alert('O fatorial de 8 é ' + x)
+
+      // Esta função recebe um único argumento, chamado n
+      function fatorial(n) {
+         let fat = 1 // 1 é elemento neutro da multiplicação
+         for(let i = n; i > 1; i--) { // i = 5 4 3 2 1
+            fat *= i
+         }
+         // Retorno do resultado da função
+         return fat
+      }
+
+      let calculo = fatorial(11) // Chamada de função
+      alert(calculo)
+
+   /*    let num = parseInt(prompt('Digite um número inteiro:'))
+      let result = fatorial(num)
+      alert('O fatorial de ' + num + ' é ' + result)
+ */
+      // Essa função tem DOIS argumentos
+      function potencia(base, expoente) {
+         return base ** expoente
+      }
+
+      //let a = potencia(5, 3)
+      //alert('5 ** 3 é ' + a)
+      alert('5 ** 3 é ' + potencia(5, 3))
+
+      // Todas as funções acima são DETERMINÍSTICAS: dadas as mesmas entradas,
+      // sempre se obterá as mesmas saídas
+
+      // Exemplo de uma função NÃO-DERMINÍSTICA: Math.random()
+      // Não há garantia de que chamadas idênticas retornem o mesmo resultado
+
+      alert(Math.random())
+      alert(Math.random())
+      alert(Math.random())
+
+      // Funções sem parâmetro: além o caso do Math.random(), podemos
+      // ter outras funções que não recebem parâmetros
+      function temCerteza() {
+         let resposta = confirm('Tem certeza?')
+         return resposta
+      }
+
+      alert('Eis a certeza do usuário: ' + temCerteza())
+
+      // PARÂMETROS OPCIONAIS
+      // Escrever uma função que calcule a área de uma figura geométrica plana,
+      // com base nos valores de sua base e altura. As figuras suportadas são:
+      // quadriláteros, triângulos e elipses
+
+      // No caso da função abaixo, o parâmetro forma foi tornado opcional.
+      // Se esse parâmetro não for informado, será considerado o valor
+      // estabelecido na função
+      // Parâmetros opcionais precisam vir NO FINAL da lista de parâmetros
+      function calcularArea(base, altura, forma = 'E') {
+         let area
+         switch(forma) {
+            case 'Q': // quadrilátero
+               area = base * altura
+               break
+
+            case 'T': // triângulo
+               area = base * altura / 2
+               break
+
+            case 'E': // Elipses e círculos
+               area = base * altura * Math.PI
+               break
+
+            default:
+               alert('Forma geométrica inválida!')
+      
+         }
+         return area
+      }
+
+      alert('Quadrilátero de 4.5 x 6 = ' + calcularArea(4.5, 6, 'Q'))
+      alert('Triângulo de 2 x 3 = ' + calcularArea(2, 3, 'T'))
+      
+      alert('Círculo de 2 de raio = ' + calcularArea(2, 2))
+      alert('Elipse de 5 x 3.5 de raio = ' + calcularArea(5, 3))
+      alert('Elipse de 4 x 2.75 de raio = ' + calcularArea(4, 2.75, 'E'))
+
+      // ARGUMENTO DE RESTO
+      // Problema: escrever uma função que receba uma quantidade arbitrária
+      // de números e determine qual deles é o menor
+      
+      // Argument de resto permite que um número arbitrário de parâmetros seja
+      // passado a uma função. O parâmetro de resto é indicado por ...
+      function minimo(...nums) {
+         // O argumento de resto é recebido dentro da função como um VETOR
+         // [3, 7, 4, 2, 0, 1, 5, 8]
+         let min = nums[0]
+         for(let i = 1; i < nums.length; i++) {
+            if(nums[i] < min) min = nums[i]
+         }
+         return min
+      }
+
+      alert('Mínimo de 5 e 3 = ' +  minimo(5, 3))
+      alert('Mínimo de 3, 7, 4, 2, 0, 1, 5, 8 = ' + minimo(3, 7, 4, 2, 0, 1, 5, 8))
+
+      // Pode haver argumentos comuns ANTES do argumento de resto
+      function aritmetica(operador, ...nums) {
+         let res
+         if(operador == '+') {
+            res = 0
+            for(let i = 0; i < nums.length; i++) {
+               res += nums[i]
+            }
+         }
+         else if(operador == '*') {
+            res = 1
+            for(let i = 0; i < nums.length; i++) {
+               res *= nums[i]
+            }
+         }
+         return res
+      }
+
+      alert(aritmetica('+', 4, 5, 3, 8))
+      alert(aritmetica('*', 4, 2, 7))
+
+   </script>
+</head>
+<body>
+   <h1>Título do documento</h1>
+   <p>Parágrafo de texto</p>
+</body>
+</html>
