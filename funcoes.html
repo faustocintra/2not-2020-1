@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Documento Modelo</title>
+</head>
+
+<body>
+   <h1>Título do documento</h1>
+   <p>Parágrafo de texto</p>
+
    <script>
       // Liga o modo "chato" do JS
       // Não deixa usar variáveis sem let ou var
@@ -23,7 +30,7 @@
       // Fatorial de um número n é igual ao produto dele próprio multiplicado
       // pelos seus antecessores maiores que 1
       // 5! = 5 * 4 * 3 * 2 * 1 (120)
-      
+
       // Chamada de função feita ANTES da declaração da função
       let x = fatorial(8)
       alert('O fatorial de 8 é ' + x)
@@ -31,7 +38,7 @@
       // Esta função recebe um único argumento, chamado n
       function fatorial(n) {
          let fat = 1 // 1 é elemento neutro da multiplicação
-         for(let i = n; i > 1; i--) { // i = 5 4 3 2 1
+         for (let i = n; i > 1; i--) { // i = 5 4 3 2 1
             fat *= i
          }
          // Retorno do resultado da função
@@ -41,10 +48,10 @@
       let calculo = fatorial(11) // Chamada de função
       alert(calculo)
 
-   /*    let num = parseInt(prompt('Digite um número inteiro:'))
-      let result = fatorial(num)
-      alert('O fatorial de ' + num + ' é ' + result)
- */
+      /*    let num = parseInt(prompt('Digite um número inteiro:'))
+         let result = fatorial(num)
+         alert('O fatorial de ' + num + ' é ' + result)
+    */
       // Essa função tem DOIS argumentos
       function potencia(base, expoente) {
          return base ** expoente
@@ -84,7 +91,7 @@
       // Parâmetros opcionais precisam vir NO FINAL da lista de parâmetros
       function calcularArea(base, altura, forma = 'E') {
          let area
-         switch(forma) {
+         switch (forma) {
             case 'Q': // quadrilátero
                area = base * altura
                break
@@ -99,14 +106,14 @@
 
             default:
                alert('Forma geométrica inválida!')
-      
+
          }
          return area
       }
 
       alert('Quadrilátero de 4.5 x 6 = ' + calcularArea(4.5, 6, 'Q'))
       alert('Triângulo de 2 x 3 = ' + calcularArea(2, 3, 'T'))
-      
+
       alert('Círculo de 2 de raio = ' + calcularArea(2, 2))
       alert('Elipse de 5 x 3.5 de raio = ' + calcularArea(5, 3))
       alert('Elipse de 4 x 2.75 de raio = ' + calcularArea(4, 2.75, 'E'))
@@ -114,34 +121,34 @@
       // ARGUMENTO DE RESTO
       // Problema: escrever uma função que receba uma quantidade arbitrária
       // de números e determine qual deles é o menor
-      
+
       // Argument de resto permite que um número arbitrário de parâmetros seja
       // passado a uma função. O parâmetro de resto é indicado por ...
       function minimo(...nums) {
          // O argumento de resto é recebido dentro da função como um VETOR
          // [3, 7, 4, 2, 0, 1, 5, 8]
          let min = nums[0]
-         for(let i = 1; i < nums.length; i++) {
-            if(nums[i] < min) min = nums[i]
+         for (let i = 1; i < nums.length; i++) {
+            if (nums[i] < min) min = nums[i]
          }
          return min
       }
 
-      alert('Mínimo de 5 e 3 = ' +  minimo(5, 3))
+      alert('Mínimo de 5 e 3 = ' + minimo(5, 3))
       alert('Mínimo de 3, 7, 4, 2, 0, 1, 5, 8 = ' + minimo(3, 7, 4, 2, 0, 1, 5, 8))
 
       // Pode haver argumentos comuns ANTES do argumento de resto
       function aritmetica(operador, ...nums) {
          let res
-         if(operador == '+') {
+         if (operador == '+') {
             res = 0
-            for(let i = 0; i < nums.length; i++) {
+            for (let i = 0; i < nums.length; i++) {
                res += nums[i]
             }
          }
-         else if(operador == '*') {
+         else if (operador == '*') {
             res = 1
-            for(let i = 0; i < nums.length; i++) {
+            for (let i = 0; i < nums.length; i++) {
                res *= nums[i]
             }
          }
@@ -151,10 +158,106 @@
       alert(aritmetica('+', 4, 5, 3, 8))
       alert(aritmetica('*', 4, 2, 7))
 
+      /***************************************************
+         FUNÇÕES SEM VALOR DE RETORNO
+         São trechos de código, normalmente repetitivos, que são isolados
+         dentro de uma função para serem chamados posteriormente, mas não
+         retornam valor algum.
+      */
+
+      // DECLARAÇÃO de função
+      function criarLista(numItens) {
+         let lista = document.createElement('ul')
+         document.body.appendChild(lista)
+
+         for (let i = 1; i <= numItens; i++) {
+            let item = document.createElement('li')
+            item.innerText = 'Item ' + i
+            lista.appendChild(item)
+         }
+      }
+
+      // Chamadas da função
+
+      // n vai dar undefined, porque a função não tem valor de retorno
+      let n = criarLista(4)
+      criarLista(10)
+
+      console.log({ n })
+
+      /**********************************************************
+         EXPRESSÕES DE FUNÇÃO
+         Ocorrem quando a declaração da função é atribuída a uma variável.
+         Nesse caso, a função geralmente é anônima e a chamada à função
+         precisa vir, necessariamente, DEPOIS da declaração da expressão.
+      */
+
+      // Tipos de dados em JS:
+      // 1: string
+      // 2: number
+      // 3: boolean
+      // 4: object (vetores, por. ex.)
+      // 5: undefined
+      // 6: FUNCTION
+
+      // NÃO FUNCIONA!!!
+      // alert(soma(12, 7))  // Chamada ANTES da expressão de função
+
+      // A função propriamente dita é anônima
+      let soma = function (a, b) {  // EXPRESSÃO DE FUNÇÃO
+         return a + b
+      }
+
+      alert(soma(20, 6))  // Chamada DEPOIS da expressão de função
+
+      /************************************************************
+         ARROW FUNCTIONS
+      */
+
+      const quadrado = function (x) {
+         return x * x
+      }
+
+      // A função acima pode ser escrita da seguinte forma, usando
+      // uma sintaxe alternativa chamada ARROW FUNCTION
+
+      // 1) A palavra-chave function é omitida
+      // 2) Os parênteses em torno do único parâmetro são omitidos
+      // 3) Entre o parâmetro e o corpo da função escreve-se a =>
+      // 4) As chaves são omitidas
+      // 5) A palavra-chave return é omitida
+      const quadrado2 = x => x * x
+
+      // Havendo 0 parâmetros OU mais de um parâmetro, os parênteses
+      // em torno dos parâmetros voltam a ser obrigatórios
+      const soma2 = (a, b) => a + b
+
+      // Havendo mais de uma linha no corpo da função, as chaves e a
+      // palavra-chave return (caso haja a intenção de retornar valor)
+      // voltam a ser obrigatórios
+
+      /*       function fatorial(n) {
+               let fat = 1 // 1 é elemento neutro da multiplicação
+               for(let i = n; i > 1; i--) { // i = 5 4 3 2 1
+                  fat *= i
+               }
+               // Retorno do resultado da função
+               return fat
+            }
+      */
+
+      let fatorial2 = n => {
+         let fat = 1 // 1 é elemento neutro da multiplicação
+         for (let i = n; i > 1; i--) { // i = 5 4 3 2 1
+            fat *= i
+         }
+         // Retorno do resultado da função
+         return fat
+      }
+
+
    </script>
-</head>
-<body>
-   <h1>Título do documento</h1>
-   <p>Parágrafo de texto</p>
+
 </body>
+
 </html>
