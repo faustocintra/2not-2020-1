@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Documento Modelo</title>
+   <script>
+      // Liga o modo "chato" do JS
+      // Não deixa usar variáveis sem let ou var
+      'use strict'
+
+      let pessoas = [
+         {
+            nome: 'Gervásio',
+            idade: 71,
+            peso: 98,
+            'altura (m)': 1.74
+         },
+         {
+            nome: 'Jurismara',
+            idade: 17,
+            peso: 49,
+            'altura (m)': 1.65
+         }
+      ]
+
+      // Nova pessoa, criada FORA do vetor
+      let novaPessoa = {
+         nome: 'Waldisney',
+         idade: 33,
+         peso: 82,
+         'altura (m)': 1.82
+      }
+
+      // Acrescendo a novaPessoa ao vetor de pessoas
+      pessoas.push(novaPessoa)
+
+      // Exibindo o nome das pessoas
+      // MODO 1: for tradicional
+      for(let i = 0; i < pessoas.length; i++) {
+         document.write(pessoas[i].nome + ' tem ' + pessoas[i]['altura (m)'] + '<br>')
+      }
+
+      document.write('<hr>')
+
+      // MODO 2: usando for..of
+      for(let pessoa of pessoas) {
+         document.write(pessoa.nome + ' tem ' + pessoa['altura (m)'] + '<br>')
+      }
+
+      console.log(pessoas)
+
+
+   </script>
+</head>
+<body>
+   <h1>Título do documento</h1>
+   <p>Parágrafo de texto</p>
+</body>
+</html>

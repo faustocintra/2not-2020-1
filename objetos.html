@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Documento Modelo</title>
+   <script>
+      // Liga o modo "chato" do JS
+      // Não deixa usar variáveis sem let ou var
+      'use strict'
+
+      let pessoa1 = [ 'Fulano de Tal', 45, 'M', 'fulano.tal@gmail.com', 87, 1.71 ]
+      let pessoa2 = [ 'Beltrano das Flores', 34, 'M', 'beltrano@bol.com.br', 102, 1.83]
+
+      // Exibindo o nome das pessoas - é necessário lembrar que o nome está na
+      // posição 0
+      document.write(pessoa1[0] + '<br>')
+      document.write(pessoa2[0] + '<br>')
+      
+      // Calculando a média de altura dessas duas pessoas - preciso lembrar
+      // (ou contar) em qual posição foi colocada a altura das pessoas
+      // No caso, DEPOIS DE CONTAR, lembramos que é na posição 5
+      let mediaAltura = (pessoa1[5] + pessoa2[5]) / 2
+      document.write('A média das alturas é ' + mediaAltura + '<br>')
+
+      // SOLUÇÃO: o tipo de dados OBJETO (object)
+
+      // Criação de um objeto vazio
+      let pess1 = {} // Chaves vazias
+      // let pess1 = new Object() // Forma alternativa
+
+      // Nos objetos, as posições não são numerdas como nos vetores. Elas são
+      // NOMEADAS
+      pess1.nome = 'Fulano de Tal'
+      pess1.idade = 45
+      pess1.sexo = 'M'
+      pess1.email = 'fulano.tal@gmail.com'
+      pess1.peso = 87
+      pess1.altura = 1.71
+
+      // Criando um objeto já com dados dentro dele
+      let pess2 = {
+         nome: 'Beltrano das Flores',
+         // O conjunto do nome da posição com o seu valor
+         // é chamdado de atributo ou propriedade
+         // idade -> nome do atributo ou da propriedade
+         // 34 -> valor do atributo ou propriedade
+         idade: 34,
+         sexo: 'M',
+         email: 'beltrano@bol.com.br',
+         peso: 102,
+         altura: 1.83
+      }
+
+      console.log(pessoa1) // Vetor
+      console.log(pess1) // Objeto
+      console.log(pess2) // Objeto
+
+      // Exibindo os nomes das pessoas nos objetos
+      document.write(pess1.nome + '<br>')
+      document.write(pess2.nome + '<br>')
+      mediaAltura = (pess1.altura + pess2.altura) / 2
+      document.write('A média de altura das pessoas é ' + mediaAltura + '<br>')
+
+      let pess3 = {
+         nome: 'Sicrana das Neves',
+         idade: 59,
+         sexo: 'F',
+         email: 'sicrana@hotmail.com',
+         peso: 67,
+         altura: 1.62,
+         // Nome de propriedade com caracteres especiais ou
+         // com espaços, o nome da propriedade precisa vir entre
+         // aspas
+         'documento de identidade': '22.333.444-55'         
+      }
+
+      // Sintaxe de ponto NÃO funciona nos casos em que é obrigatório
+      // colocar o nome do atributo entre aspas
+      //document.write(pess3.'documento de identidade' + '<br>')
+      document.write(pess3['documento de identidade'] + '<br>')
+
+      // A sintaxe do colchete funciona para QUALQUER atributo
+      document.write(pess3['email'] + '<br>')
+
+      // Criando nova propriedade para dois objetos
+      pess1['documento de identidade'] = '11.222.333-44'
+      pess2['documento de identidade'] = '99.888.777-66'
+
+      // Criando nova propriedade para os objetos
+      //let prop = ['email', 'nome', 'aposentado']
+      let prop = 'aposentado'
+      let nao = false
+      pess1.aposentado = nao
+      pess2['aposentado'] = nao
+      //pess3[prop[2]] = true
+      pess3[prop] = true
+
+      console.log(pess1)
+      console.log(pess2)
+      console.log(pess3)
+
+      // Listando as propriedades existentes em um objeto: for...in
+      console.log('----------------------------------------')
+      let p = ''
+      for(let nomeProp in pess1) {
+         p += nomeProp + ', '
+         console.log(nomeProp)
+      }
+      document.write(p + '<br>')
+
+      // Listando o nome das propriedades E também seus valores
+      for(let prop in pess2) {
+         // A variável prop contém o NOME DA PROPRIEDADE
+         // Usando a sintaxe de colchetes, é possível acessar o
+         // VALOR DA PROPRIEDADE usando a variável prop para indicar
+         // o NOME DA PROPRIEDADE
+         document.write(prop + ' = ' + pess2[prop] + '<br>')
+      }
+
+      // Excluindo uma propriedade: delete
+      delete pess1.aposentado
+      console.log(pess1)
+
+   </script>
+</head>
+<body>
+   <h1>Título do documento</h1>
+   <p>Parágrafo de texto</p>
+</body>
+</html>
