@@ -23,7 +23,34 @@
 
       */
 
-         
+      // Declaração da função: recebe 1 argumento, não tem valor de retorno
+      function criarParag(limite) {
+         let parag;
+         for(let i = 1; i <= limite; i++) {
+            parag = document.createElement('p');
+            parag.innerText = i;
+            document.body.appendChild(parag);
+         }
+      }
+
+      let quant;
+      do {
+         quant = parseInt(prompt('Quantos parágrafos serão gerados?'));
+      } while(isNaN(quant) || quant <= 0);
+
+      // Chamada da função
+      criarParag(quant);
+
+      let hr = document.createElement('hr'); // Traço horizontal
+      document.body.appendChild(hr);
+
+      do {
+         quant = parseInt(prompt('Mais quantos parágrafos agora?'));
+      } while(isNaN(quant) || quant <= 0);
+
+      // Chamada da função
+      criarParag(quant);
+   
    </script>  
 </body>
 </html>

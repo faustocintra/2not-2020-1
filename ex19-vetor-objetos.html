@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Página modelo</title>
+   <style>
+      body {
+         background-image: linear-gradient(royalblue,indigo);
+         background-color: indigo;
+         background-repeat: no-repeat;
+      }
+      section {
+         background: white;
+         width: 70%;
+         margin: 50px auto;
+         height: auto;
+         padding: 20px;
+         border-radius: 20px;
+         box-shadow: 5px 5px 10px #888;
+      }
+      h1 {
+         text-shadow: 2px 2px 2px #888;
+      }
+      div {
+         padding: 20px;
+      }
+      label {
+         display: block;
+      }
+      button {
+         padding: 10px;
+      }
+      #visualizar {
+         background: mediumblue;
+         color: white;
+         
+      }
+      #relatorio {
+         background:moccasin;
+         padding: 20px;
+         border-radius: 10px;
+         clear: both;
+      }
+   </style>
+   
+</head>
+<body>
+   <section>
+      <h1>Cadastro de produtos</h1>
+      
+      <div>
+         <label>Nome do produto</label>
+         <input id="nomeProd" size="50">
+      </div>
+
+      <div>
+         <label>Quantidade</label>
+         <input id="quantidade" type="number">
+      </div>
+
+      <div>
+         <label>Preço unitário</label>
+         <input id="precoUnit" type="number" step="0.01">
+      </div>
+
+      <div>
+         <button id="salvar">Salvar</button>
+      </div>
+
+      <div>
+         <button id="visualizar">Visualizar</button>
+      </div>
+
+      <div id="relatorio">
+         
+      </div>
+   </section>   
+
+   <script>
+      'use strict'; // Modo "chato" do Javascript
+
+      /*
+      
+         1) Capture os elementos do HTML com getElementById() ou querySelector().
+
+         2) Declare um vetor vazio.
+
+         3) Crie uma função que leia o conteúdo dos input e crie um objeto para armazenar
+            as informações coletadas. Esse objeto deve ser acrescentado ao vetor criado
+            no passo 2. Após isso, limpe os inputs e ponha o foco no primeiro deles.
+            Essa função deve ser atribuída ao evento 'click' do botão Salvar.
+
+         4) Crie outra função. Limpe o conteúdo da div de relatório, e em seguida percorra 
+            o vetor criado no passo 2 e, para cada elemento dentro dele, exibir o nome do 
+            produto, a quantidade, o valor unitário e o valor total, dentro da div de relatório.
+            Para exibir essas informações, crie um elemento <p> para cada produto.
+            Essa função deve ser atribuída ao evento 'click' do botão visualizar.
+
+      */
+
+   </script>
+</body>
+</html>

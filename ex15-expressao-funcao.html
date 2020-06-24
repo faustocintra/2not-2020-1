@@ -18,6 +18,47 @@
          Tente chamar a expressão de função ANTES e DEPOIS de
          declará-la. Em que situação a chamada funciona?
       */
+
+      // Chamadas de função ANTES da respectiva expressão de função
+      
+      /**** NÃO FUNCIONA ****/
+      /* document.write(comparar(3, 3));
+      document.write('<br>');
+      document.write(comparar(10, 20));
+      document.write('<br>');
+      document.write(comparar(0, -7));
+      document.write('<br>');
+
+      let num1 = Number(prompt('Informe o primeiro número:'));
+      let num2 = Number(prompt('Informe o segundo número:')); 
+
+      alert(comparar(num1, num2)); */
+      
+      // EXPRESSÃO DE FUNÇÃO -> a função é atribuída a uma variável
+      let comparar = function(n1, n2) {
+         if(n1 > n2) {
+            return -1;
+         }
+         else if(n1 == n2) {
+            return 0;
+         }
+         else {
+            return 1;
+         }
+      }
+
+      // Chamadas de função DEPOIS da respectiva expressão de função
+      document.write(comparar(3, 3));
+      document.write('<br>');
+      document.write(comparar(10, 20));
+      document.write('<br>');
+      document.write(comparar(0, -7));
+      document.write('<br>');
+
+      let num1 = Number(prompt('Informe o primeiro número:'));
+      let num2 = Number(prompt('Informe o segundo número:')); 
+
+      alert(comparar(num1, num2));            
    
    </script>
 </head>
