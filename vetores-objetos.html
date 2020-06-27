@@ -14,7 +14,8 @@
             nome: 'Gervásio',
             idade: 71,
             peso: 98,
-            'altura (m)': 1.74
+            'altura (m)': 1.74,
+            aposentado_desde: 2011
          },
          {
             nome: 'Jurismara',
@@ -46,6 +47,13 @@
       // MODO 2: usando for..of
       for(let pessoa of pessoas) {
          document.write(pessoa.nome + ' tem ' + pessoa['altura (m)'] + '<br>')
+      }
+
+      for(let pessoa of pessoas) {
+         // Testando se uma propriedade existe
+         if(pessoa.aposentado_desde !== undefined) {
+            document.write(pessoa.nome + ' é aposentado desde ' + pessoa.aposentado_desde + '<br>')
+         }
       }
 
       console.log(pessoas)

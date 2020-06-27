@@ -100,6 +100,108 @@
 
       */
 
+      // 1) Capture os elementos do HTML com getElementById() ou querySelector().
+      const nomeProd = document.querySelector('#nomeProd')
+      const quantidade = document.querySelector('#quantidade')
+      const precoUnit = document.querySelector('#precoUnit')
+      const salvar = document.querySelector('#salvar')
+      const visualizar = document.querySelector('#visualizar')
+      const relatorio = document.querySelector('#relatorio')
+
+      // 2) Declare um vetor vazio.
+      let vet = []
+
+      /*
+         3) Crie uma função que leia o conteúdo dos input e crie um objeto para armazenar
+            as informações coletadas. Esse objeto deve ser acrescentado ao vetor criado
+            no passo 2. Após isso, limpe os inputs e ponha o foco no primeiro deles.
+            Essa função deve ser atribuída ao evento 'click' do botão Salvar.
+      */
+
+      function coletaDados() {
+
+         let valido = true
+         
+         if(nomeProd.value.trim() == '') {
+            alert('Informe o nome do produto.')
+            nomeProd.focus()
+            valido = false
+         }
+         else if(isNaN(quantidade.value) || quantidade.value <= 0) {
+            alert('Informe uma quantidade válida.')
+            quantidade.focus()
+            valido = false
+         }
+         else if(isNaN(precoUnit.value) || precoUnit.value <= 0) {
+            alert('Informe um preço unitário válido.')
+            precoUnit.focus()
+            valido = false
+         }
+
+         if(valido) {
+            // Objeto vazio
+            let produto = {}
+            produto.nomeProd = nomeProd.value
+            produto.quantidade = Number(quantidade.value)
+            produto.precoUnit = Number(precoUnit.value)
+
+            // Outra forma de fazer - mesmo resultado
+            /*
+            let produto = {
+               nomeProd: nomeProd.value,
+               quantidade: Number(quantidade.value),
+               precoUnit: Number(precoUnit.value)
+            }
+            */
+
+            // Colocando o objeto dentro do vetor criado no passo 2
+            vet.push(produto)
+
+            // Limpar os inputs
+            nomeProd.value = ''
+            quantidade.value = ''
+            precoUnit.value = ''
+
+            nomeProd.focus()
+         }
+
+      }
+
+      salvar.addEventListener('click', coletaDados)
+
+      /*
+         4) Crie outra função. Limpe o conteúdo da div de relatório, e em seguida percorra 
+            o vetor criado no passo 2 e, para cada elemento dentro dele, exibir o nome do 
+            produto, a quantidade, o valor unitário e o valor total, dentro da div de relatório.
+            Para exibir essas informações, crie um elemento <p> para cada produto.
+            Essa função deve ser atribuída ao evento 'click' do botão visualizar.
+      */
+      function exibirRelatorio() {
+         
+         // Limpando o conteúdo da div de relatório
+         relatorio.innerText = ''
+
+         // Percorrendo o vetor de objetos
+         for(let i = 0; i < vet.length; i++) {
+            
+            // Criação de um novo parágrafo
+            let parag = document.createElement('p')
+            
+            // Montagem do conteúdo do parágrafo
+            parag.innerHTML = ''
+            parag.innerHTML += 'Produto: ' + vet[i].nomeProd + '<br>'
+            // Padronizando a quantidade de casas decimais após a vírgula
+            parag.innerHTML += 'Quantidade: ' + vet[i].quantidade.toLocaleString('pt-BR', { maximumSignificantDigits : 2 }) + '<br>'
+            parag.innerHTML += 'Preço unitário: ' + vet[i].precoUnit.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) + '<br>'
+            parag.innerHTML += 'Preço total: ' + (vet[i].quantidade * vet[i].precoUnit).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })            
+
+            // Coloca o parágrafo dentro da div de relatório
+            relatorio.appendChild(parag)
+         }
+      }
+
+      visualizar.addEventListener('click', exibirRelatorio)
+
    </script>
 </body>
 </html>
