@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>PROVA 02</title>
+   <style>
+      html,
+      body {
+         position: absolute;
+         height: 100%;
+         width: 100%;
+         margin: 0;
+         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+         font-size: 12pt;
+         line-height: 18pt;
+         color: #444;
+      }
+
+      body {
+         background-image: linear-gradient(lightsteelblue 50%, teal);
+         background-color: teal;
+         background-repeat: no-repeat;
+         padding: 0;
+      }
+
+      section {
+         background: whitesmoke;
+         margin: 3%;
+         padding: 25px;
+         border-radius: 20px;
+         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+         display: flex;
+         flex-direction: row;
+         flex-wrap: wrap;
+         justify-content: space-around;
+      }
+
+      h1 {
+         font-size: 2rem;
+         text-align: center;
+         color: teal;
+         width: 90%;
+      }
+
+      section div {
+         border-radius: 10px;
+         padding: 10px;
+         width: 30%;
+         max-width: 90%;
+         min-width: 250px;
+         margin: 1% 0;
+      }
+
+      section div:nth-child(even) {
+         background-color: beige;
+         border: 1px solid teal;
+      }
+
+      section div:nth-child(odd) {
+         background-color: lavender;
+         border: 1px solid lightsteelblue;
+      }
+   </style>
+</head>
+
+<body>
+   <section>
+      <h1>Relação de pacientes</h1>
+   </section>
+   <script>
+      'use strict'; // Modo "chato" do Javascript
+
+      /*
+         5. Transforme a declaração da função faixaImc(), já presente no arquivo 
+         da prova, em uma expressão de função.
+      */
+      const faixaImc = function (valorImc) {
+         if (valorImc < 17) {
+            return 'Muito abaixo do peso'
+         }
+         else if (valorImc >= 17 && valorImc < 18.5) {
+            return 'Abaixo do peso'
+         }
+         else if (valorImc >= 18.5 && valorImc < 25) {
+            return 'Peso normal'
+         }
+         else if (valorImc >= 25 && valorImc < 30) {
+            return 'Acima do peso'
+         }
+         else if (valorImc >= 30 && valorImc < 35) {
+            return 'Obesidade I'
+         }
+         else if (valorImc >= 35 && valorImc < 40) {
+            return 'Obesidade II (severa)'
+         }
+         else {
+            return 'Obesidade III (mórbida)'
+         }
+      }
+
+      /*
+         4. Declare uma função que receba o peso e a altura de uma pessoa e 
+         retorne o respectivo Índice de Massa Corporal (IMC), que é calculado 
+         pela fórmula peso / (altura)².
+      */
+      function calcularImc(peso, altura) {
+         return peso / (altura ** 2)
+      }
+
+      /*
+         6. Declare um vetor vazio.
+      */
+      let vetor = []
+
+      /*
+         7. Utilize os dados da Tabela 1 para criar um objeto correspondente a 
+         cada linha da tabela. Cada novo objeto criado deve ser colocado no 
+         início do vetor declarado no item 6.
+      */
+      
+      // Um objeto pode ser criado já com propriedades preenchidas...
+      let obj1 = {   
+         nome: 'Filipa Fagundes',
+         sexo: 'Feminino',
+         idade: 50,
+         peso: 113,
+         altura: 1.71
+      }
+      // Inserindo no INÍCIO do vetor
+      vetor.unshift(obj1)
+
+      // ...ou vazio, sendo suas propriedades preechidas na sequência.
+      let obj2 = {}
+      obj2.nome = 'Eriovaldo Espinosa'
+      obj2.sexo = 'Masculino'
+      obj2.idade = 26
+      obj2.peso = 84
+      obj2.altura = 1.62
+
+      // Inserindo no INÍCIO do vetor
+      vetor.unshift(obj2) 
+
+      let obj3 = {   
+         nome: 'Deusdete Dutra',
+         sexo: 'Feminino',
+         idade: 19,
+         peso: 94,
+         altura: 1.83
+      }
+      // Inserindo no INÍCIO do vetor
+      vetor.unshift(obj3)
+
+      let obj4 = {   
+         nome: 'Cleomar Camargo',
+         sexo: 'Masculino',
+         idade: 36,
+         peso: 48,
+         altura: 1.67
+      }
+      // Inserindo no INÍCIO do vetor
+      vetor.unshift(obj4)
+
+      let obj5 = {   
+         nome: 'Bertoldo Braga',
+         sexo: 'Masculino',
+         idade: 67,
+         peso: 61,
+         altura: 1.72
+      }
+      // Inserindo no INÍCIO do vetor
+      vetor.unshift(obj5)     
+
+      let obj6 = {   
+         nome: 'Adelina Almeida',
+         sexo: 'Feminino',
+         idade: 40,
+         peso: 76,
+         altura: 1.60
+      }
+      // Inserindo no INÍCIO do vetor
+      vetor.unshift(obj6)
+
+      /*
+         8. Percorra o vetor de objetos usando um loop for..of. A cada iteração, 
+         crie um novo elemento do tipo div e nele coloque os dados de cada 
+         paciente, um por linha. Note que o valor correspondente ao IMC do 
+         paciente deve ser calculado fazendo-se chamada à função declarada no 
+         item 4. De modo semelhante, a situação do paciente deve ser determinada 
+         por meio de chamada à função faixaImc(). Em seguida, acrescente a div 
+         à lista de elementos filhos do elemento section, ainda dentro do loop.
+      */
+
+      // Capturando o elemento section
+      let secao = document.querySelector('section')
+
+      for(let paciente of vetor) {
+         let div = document.createElement('div')
+         let imc = calcularImc(paciente.peso, paciente.altura)
+
+         div.innerHTML = 'Nome: ' + paciente.nome + '<br>'
+         div.innerHTML += 'Sexo: ' + paciente.sexo + '<br>'
+         div.innerHTML += 'Idade: ' + paciente.idade + '<br>'
+         div.innerHTML += 'Peso (kg): ' + paciente.peso + '<br>'
+         div.innerHTML += 'Altura (m): ' + paciente.altura + '<br>'
+         div.innerHTML += 'IMC: ' + imc + '<br>'
+         div.innerHTML += 'Situação: ' + faixaImc(imc)
+
+         secao.appendChild(div)
+      }
+
+
+   </script>
+</body>
+
+</html>
