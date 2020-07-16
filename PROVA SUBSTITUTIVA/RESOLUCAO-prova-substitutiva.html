@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>PROVA SUBSTITUTIVA</title>
+   <style>
+      * {
+         font-family:'Calibri', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+         font-size: 12pt;
+      }
+      html, body {
+         position: absolute;
+         height: 100%;
+         width: 100%;
+         margin: 0;
+         line-height: 18pt;
+         color: #444;
+      }
+      body {
+         background-color:darkred;
+         background-image: linear-gradient(salmon, darkred);
+         background-repeat: no-repeat;
+         padding: 0;
+      }
+      section {
+         background: whitesmoke;
+         margin: 2% 10%;
+         padding: 25px;
+         border-radius: 20px;
+         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+         display: flex;
+         flex-direction: column;
+         justify-content: space-around;
+      }
+      h1 {
+         font-size: 2rem;
+         text-align: center;
+         color: darkred;
+         text-shadow: 2px 2px 2px rgba(139, 0, 0, 0.5);
+         
+      }
+      section > div {
+         padding: 10px;
+         width: 50%;
+         max-width: 90%;
+         min-width: 250px;
+         margin: 1% auto;
+      }
+      section div {
+         margin: 0.5% auto;
+      }
+      div label {
+         display: block;
+      }
+      #botoes {
+         display: flex;
+         justify-content: space-around;
+         margin-top: 30px;        
+      }
+      button {
+         padding: 8px;
+         border-radius:8px;
+         color: darkred;
+         background: salmon;
+      }
+      #sumario {
+         background-color:cornsilk;
+         padding: 10px;
+         border-radius: 10px;
+      }
+      label {
+         color: darkred;
+      }
+      input {
+         border-radius: 4px;
+         padding: 4px;
+         border: 1px dotted salmon;
+      }
+      span {
+         font-weight: bold;
+         color:darkred;
+      }
+   </style>
+ 
+</head>
+
+<body>
+   <section>
+      <h1>Cadastro de veículos</h1>
+
+      <div id="cadastro">
+         <div>
+            <label>Marca</label>
+            <input id="marca" size="40">
+         </div>
+
+         <div>
+            <label>Modelo</label>
+            <input id="modelo" size="40">
+         </div>
+
+         <div>
+            <label>(N)acional ou (I)mportado?</label>
+            <input id="nacImp" maxlength="1" size="5">
+         </div>
+
+         <div>
+            <label>Ano de fabricação</label>
+            <input id="anoFab" type="number" min="1900" max="2020">
+         </div>
+
+         <div id="botoes">
+            <button id="salvar">Salvar</button>
+         </div>
+      </div>
+
+      <div id="sumario">
+         <div>Nacionais: <span id="qtdeNacionais"></span></div>
+         <div>Importados: <span id="qtdeImportados"></span></div>
+         <div>Mais antigo: <span id="maisAntigo"></span></div>
+         <div>Mais recente: <span id="maisRecente"></span></div>
+      </div>
+
+   </section>
+
+   <!-- Quando se manipula o DOM, a seção <script> deve vir APÓS os elementos 
+      manipulados -->
+   <script>
+      'use strict'; // Modo "chato" do Javascript
+
+      /*
+         3. Capture os elementos HTML do documento utilizando querySelector().
+      */
+      const marca = document.querySelector('#marca')
+      const modelo = document.querySelector('#modelo')
+      const nacImp = document.querySelector('#nacImp')
+      const anoFab = document.querySelector('#anoFab')
+      
+      const salvar = document.querySelector('#salvar')
+
+      const qtdeNacionais = document.querySelector('#qtdeNacionais')
+      const qtdeImportados = document.querySelector('#qtdeImportados')
+      const maisAntigo = document.querySelector('#maisAntigo')
+      const maisRecente = document.querySelector('#maisRecente')
+
+      /*
+         4. Escreva   uma  expressão de função  que   receba   como   argumentos
+            marca,   modelo   enacional/importado e ano de fabricação e faça as 
+            seguintes verificações:
+         a) A marca e o modelo não podem estar vazio após a utilização de trim().
+         b) O valor nacional/importado deve aceitar apenas N ou I (em maiúsculas).
+         c) O ano de fabricação, que precisa ser numérico, deve estar entre 1900
+            (inclusive) e 2020(inclusive).A função deve emitir uma mensagem de 
+            erro ao usuário e retornar o valor false caso qualquer um desses 
+            testes falhe. Se tudo estiver certo, a função deve retornar true.
+      */
+
+      // Expressão de função
+      const validarEntrada = function(valMarca, valModelo, valNacImp, valAnoFab) {
+
+         if(valMarca.trim() == '') {
+            alert('A marca deve ser informada.')
+            return false
+         }
+         if(valModelo.trim() == '') {
+            alert('O modelo deve ser informado.')
+            return false
+         }
+         if(valNacImp !== 'N' && valNacImp !== 'I') {
+            alert('Informe apenas N (nacional) ou I (importado).')
+            return false
+         }
+         if(isNaN(valAnoFab) || valAnoFab < 1900 || valAnoFab > 2020) {
+            alert('O ano de fabricação deve estar entre 1900 e 2020.')
+            return false
+         }
+         // Se chegou até aqui, está tudo certo
+         return true
+      }
+
+      /*
+         5. Já fora da função, declare um vetor vazio.
+      */
+      let veiculos = []
+
+      /*
+         6. Declare outra função.   Essa   função   deve   ler   os   valores   
+            dos   elementos   de   marca,   modelo, nacional/importado  e   ano  
+            de  fabricação   e  efetuar  uma   chamada   à  função   escrita   
+            no   item   4, passando a ela os três valores como argumentos.
+      */
+
+      // Declaracao de função
+      function salvarVeiculo() {
+
+         // Leitura dos valores
+         let valMarca = marca.value
+         let valModelo = modelo.value
+         let valNacImp = nacImp.value
+         let valAnoFab = anoFab.value
+
+         // Chamada à função de validação
+         if(validarEntrada(valMarca, valModelo, valNacImp, valAnoFab)) {
+
+            /*
+               6a) As instruções a seguir devem ser executadas apenas se a 
+                  chamada à função do item 4 retornar true.
+                  
+               6b) Monte um objeto contendo o marca, modelo, nacional/importado 
+                  e ano de fabricação e insira-ono vetor declarado no item 5.
+            */
+
+            let veiculo = {
+               marca: valMarca,
+               modelo: valModelo,
+               nacImp: valNacImp,
+               anoFab: valAnoFab
+            }
+            // Inserção no vetor
+            veiculos.push(veiculo)
+
+            /*
+               6c) Percorra o vetor declarado no item 5. Durante o percurso, 
+                  devem ser calculados: o número deveículos nacionais, o número 
+                  de veículos importados, o ano de fabricação mais antigo e o 
+                  ano de fabricação mais recente dos veículos cujos dados estão 
+                  no vetor.
+            */
+
+            let qtdeNac = 0, qtdeImp = 0
+            let minAnoFab = 9999 // Valor muito alto, de propósito
+            let maxAnoFab = 0    // Valor muito baixo, de propósito
+
+            for(let i = 0; i < veiculos.length; i++) {
+
+               // Contagem de nacionais/importados
+               if(veiculos[i].nacImp == 'N') {
+                  qtdeNac++
+               }
+               else {
+                  qtdeImp++
+               }
+
+               // Menor ano de fabricação
+               if(veiculos[i].anoFab < minAnoFab) {
+                  minAnoFab = veiculos[i].anoFab
+               }
+
+               // Maior ano de fabricação
+               if(veiculos[i].anoFab > maxAnoFab) {
+                  maxAnoFab = veiculos[i].anoFab
+               }
+            }
+
+            /*
+               6d) Mostre as informações calculadas no subitem anterior nos 
+                  lugares a eles reservados na páginaHTML.
+            */
+            qtdeNacionais.innerText = qtdeNac
+            qtdeImportados.innerText = qtdeImp
+            maisAntigo.innerText = minAnoFab
+            maisRecente.innerText = maxAnoFab
+
+            /*
+               6e) Limpe os elementos de marca, modelo, nacional/importado e 
+                  ano de fabricação.   
+            */
+            marca.value = ''
+            modelo.value = ''
+            nacImp.value = ''
+            anoFab.value = ''
+
+         }
+      }
+
+      /*
+         7. A função declarada no item 6 deve ser atribuída ao evento de clique 
+            do botão Salvar.
+      */
+      salvar.addEventListener('click', salvarVeiculo)
+
+   </script>
+
+</body>
+
+</html>
